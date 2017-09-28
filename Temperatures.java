@@ -1,13 +1,11 @@
 import static java.lang.System.out;
 
-
 public class Temperatures
 {
     
     public static void main(String[] args)
     {
 
-        
         int [][]temps = {{68, 70, 76, 70, 68, 71, 75},
                         {76, 76, 87, 84, 82, 75, 83},
                         {73, 72, 81, 78, 76, 73, 77},
@@ -17,42 +15,46 @@ public class Temperatures
         System.out.println("");
         System.out.println("The data provided are:");
         String []times ={"7:00 AM","3:00 PM","7:00 PM","3:00 AM"};
-        for(int j = 0; j < 4; j++)
-            {
-                System.out.print("\n");            
-                System.out.print(times[j] + " ");
-                tempChart(temps);
-            }  
+        for(int index = 0; index<days.length; index++)  {
+            out.print(days[index] + "   ");
+        }
         
+        out.print("\n");
+        
+        for(int timeIndex=0; timeIndex<times.length;timeIndex++)  {
+            out.print(times[timeIndex] + "  ");
+            for(int dayIndex=0; dayIndex<days.length; dayIndex++)  {
+                out.print(temps[timeIndex][dayIndex] + "  ");
+            }
+            out.print("\n");
+        }    
+      
         System.out.print("\n");
             
         System.out.println("");
         System.out.println("Based on that data, the following are the average temperatures for the week.");
-        
-        int rowTotal = 0;
-        
-        int rowAverage7am = 0;
-        int rowAverage3pm = 0;
-        int rowAverage7pm = 0;
-        int rowAverage3am = 0;
-        for(int i = 0; i < temps.length; i++) {
-            rowTotal += temps[0][i];
-            rowAverage7am = rowTotal/7;
-            rowTotal += temps[1][i];
-            rowAverage3pm = rowTotal/7;
-            rowTotal += temps[2][i];
-            rowAverage7pm = rowTotal/7;
-            rowTotal += temps[3][i];
-            rowAverage3am = rowTotal/7;
-        }
-        out.println("7 AM:  " + rowAverage7am);
-        out.println("3 PM:  " + rowAverage3pm);
-        out.println("7 PM:  " + rowAverage7pm);
-        out.println("3 AM:  " + rowAverage3am);
-    
-        
+        float daysAverage =0;
+        float timeAverage = 0;
+        for(int daysIndex = 0; daysIndex < days.length; daysIndex++) {
+            float dayTotal = 0;
+            for(int timeIndex = 0; timeIndex < times.length; timeIndex++) {
+                dayTotal = dayTotal + temps[timeIndex][daysIndex];
+            }
+            daysAverage = dayTotal / times.length;
+            out.println(days[daysIndex] + ":  " + daysAverage);
+            }
             
-        }    
+        out.print("\n");
+        
+        for(int timeIndex = 0; timeIndex < times.length; timeIndex++) {
+            float timeTotal = 0;
+            for(int daysIndex = 0; daysIndex < days.length; daysIndex++) {
+                timeTotal = timeTotal + temps[timeIndex][daysIndex];
+            }
+            timeAverage = timeTotal / days.length;
+            out.println(times[timeIndex] + ":  " + timeAverage);
+        }
+    }    
                     
         
     public static void tempChart(int x[][])
@@ -70,10 +72,7 @@ public class Temperatures
             System.out.println("\n");      
         }
     }    
-    //public static int Average(int [][]values)
-    {
-        
-    }
+   
 }  
    
     
